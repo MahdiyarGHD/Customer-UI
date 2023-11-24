@@ -2,16 +2,23 @@
 using EasyMicroservices.ServiceContracts;
 using EasyMicroservices.UI.Cores;
 using EasyMicroservices.UI.Cores.Commands;
+using EasyMicroservices.UI.Places.ViewModels.Cities;
+using EasyMicroservices.UI.Places.ViewModels.Countries;
+using EasyMicroservices.UI.Places.ViewModels.Provinces;
 using System.Collections.ObjectModel;
 
 namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 {
     public class AddOrUpdatePersonViewModel : BaseViewModel
     {
-        public AddOrUpdatePersonViewModel(PersonClient personClient, PersonCategoryClient personCategoryClient)
+        public AddOrUpdatePersonViewModel(PersonClient personClient, PersonCategoryClient personCategoryClient, FilterCountriesListViewModel countriesListViewModel, FilterProvincesListViewModel provincesListViewModel, FilterCitiesListViewModel citiesListViewModel)
         {
             _personClient = personClient;
             _personCategoryClient = personCategoryClient;
+            CountriesViewModel = countriesListViewModel;
+            ProvincesListViewModel = provincesListViewModel;
+            CitiesListViewModel = citiesListViewModel;
+
             SaveCommand = new TaskRelayCommand(this, Save);
             Clear();
         }
@@ -20,6 +27,9 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         readonly PersonClient _personClient;
         readonly PersonCategoryClient _personCategoryClient;
+        public FilterCountriesListViewModel CountriesViewModel { get; set; }
+        public FilterProvincesListViewModel ProvincesListViewModel { get; set; }
+        public FilterCitiesListViewModel CitiesListViewModel { get; set; }
 
         public Action OnSuccess { get; set; }
         PersonContract _UpdatePersonContract;
@@ -46,9 +56,9 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                     VisaNumber = value.Visas?.Select(x => x.Number).FirstOrDefault();
                     PhoneNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Home).Select(x => x.Number).FirstOrDefault();
                     MobileNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Mobile).Select(x => x.Number).FirstOrDefault();
-                    SelectedCityId = value.CityId;
-                    SelectedProvinceId = value.ProvinceId;
-                    SelectedCountryId = value.CountryId;
+                    SelectedCityId = value.CityId.GetValueOrDefault();
+                    SelectedProvinceId = value.ProvinceId.GetValueOrDefault();
+                    SelectedCountryId = value.CountryId.GetValueOrDefault();
                 }
                 _UpdatePersonContract = value;
             }
@@ -189,9 +199,31 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
         public long SelectedPersonCategoryId { get; set; }
 
         public ObservableCollection<PersonCategoryContract> PersonCategories { get; set; } = new ObservableCollection<PersonCategoryContract>();
-        public long? SelectedCountryId { get; set; }
-        public long? SelectedProvinceId { get; set; }
-        public long? SelectedCityId { get; set; }
+        private long _selectedProvinceId;
+        public long SelectedProvinceId
+        {
+            get => _selectedProvinceId;
+            set
+            {
+                _selectedProvinceId = value;
+                OnPropertyChanged(nameof(SelectedProvinceId));
+                _ = SearchCities();
+            }
+        }
+
+        public long SelectedCityId { get; set; }
+        long _SelectedCountryId;
+        public long SelectedCountryId
+        {
+            get => _SelectedCountryId;
+            set
+            {
+                _SelectedCountryId = value;
+                OnPropertyChanged(nameof(SelectedCountryId));
+                _ = SearchProvince();
+            }
+        }
+
 
         public async Task Save()
         {
@@ -253,11 +285,11 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             Clear();
         }
 
-        List<LanguageDataContract> GetFirstNames()
+        List<Customer.GeneratedServices.LanguageDataContract> GetFirstNames()
         {
-            return new List<LanguageDataContract>()
+            return new List<Customer.GeneratedServices.LanguageDataContract>()
             {
-                new LanguageDataContract()
+                new Customer.GeneratedServices.LanguageDataContract()
                 {
                     Data = FirstName,
                     Language = "fa-IR"
@@ -265,11 +297,11 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             };
         }
 
-        List<LanguageDataContract> GetLastNames()
+        List<Customer.GeneratedServices.LanguageDataContract> GetLastNames()
         {
-            return new List<LanguageDataContract>()
+            return new List<Customer.GeneratedServices.LanguageDataContract>()
             {
-                new LanguageDataContract()
+                new Customer.GeneratedServices.LanguageDataContract()
                 {
                     Data = LastName,
                     Language = "fa-IR"
@@ -340,7 +372,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public async Task LoadConfig()
         {
-            var personCategories = await _personCategoryClient.FilterAsync(new FilterRequestContract());
+            var personCategories = await _personCategoryClient.FilterAsync(new Customer.GeneratedServices.FilterRequestContract());
             if (personCategories.IsSuccess)
             {
                 PersonCategories.Clear();
@@ -362,6 +394,18 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                     UpdatePersonContract = personContract.Result;
                 }
             }
+
+            await CountriesViewModel.Search();
+        }
+
+        public async Task SearchProvince()
+        {
+            await ProvincesListViewModel.Search();
+        }
+
+        public async Task SearchCities()
+        {
+            await CitiesListViewModel.Search();
         }
 
         public void Clear()

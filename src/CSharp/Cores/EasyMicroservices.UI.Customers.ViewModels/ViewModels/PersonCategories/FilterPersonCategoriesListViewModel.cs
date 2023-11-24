@@ -39,7 +39,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.PersonCategories
         public string SortColumnNames { get; set; }
         public ObservableCollection<PersonCategoryContract> PersonCategories { get; set; } = new ObservableCollection<PersonCategoryContract>();
 
-        private async Task Search()
+        public async Task Search()
         {
             var filteredResult = await _personCategoryClient.FilterAsync(new FilterRequestContract()
             {

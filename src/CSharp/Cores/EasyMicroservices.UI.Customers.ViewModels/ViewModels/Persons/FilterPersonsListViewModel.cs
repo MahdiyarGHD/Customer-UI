@@ -39,9 +39,9 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
         public string SortColumnNames { get; set; }
         public ObservableCollection<PersonContract> Persons { get; set; } = new ObservableCollection<PersonContract>();
 
-        private async Task Search()
+        public async Task Search()
         {
-            var filteredResult = await _personClient.FilterAsync(new FilterRequestContract()
+            var filteredResult = await _personClient.FilterAsync(new Customer.GeneratedServices.FilterRequestContract()
             {
                 IsDeleted = false,
                 Index = Index,
@@ -59,7 +59,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public async Task Delete(PersonContract contract)
         {
-            await _personClient.SoftDeleteByIdAsync(new Int64SoftDeleteRequestContract()
+            await _personClient.SoftDeleteByIdAsync(new Customer.GeneratedServices.Int64SoftDeleteRequestContract()
             {
                 Id = contract.Id,
                 IsDelete = true
