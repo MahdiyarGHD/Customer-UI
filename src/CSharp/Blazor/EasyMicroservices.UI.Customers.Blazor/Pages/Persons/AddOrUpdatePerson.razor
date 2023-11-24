@@ -1,0 +1,68 @@
+﻿@page "/AddOrUpdatePerson"
+@using EasyMicroservices.UI.Customers.ViewModels.Persons;
+@using MudBlazor
+@using global::Customer.GeneratedServices;
+@inject AddOrUpdatePersonViewModel viewModel;
+
+<MudStack>
+    <MudPaper Class="pa-4">
+        <MudStack Spacing="4" Row="true" Justify="Justify.SpaceAround" AlignItems="AlignItems.Start">
+            <MudStack Spacing="4">
+                <MudSelect @bind-Value="viewModel.SelectedPersonCategoryId" Label="Person Category" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    @foreach (var item in viewModel.PersonCategories)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudTextField @bind-Value="viewModel.FirstName" Label="First Name" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.PassportNumber" Label="Passport Number" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.VisaNumber" Label="Visa Number" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.PhoneNumber" Label="Phone Number" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.EmailAddress" Label="Email Address" Variant="Variant.Text"></MudTextField>
+            </MudStack>
+            <MudStack Spacing="4">
+                <MudSelect @bind-Value="viewModel.PersonType" Label="Person Type" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    @foreach (PersonType item in Enum.GetValues<PersonType>())
+                    {
+                        if ((int)item < 6)
+                            continue;
+                        <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudTextField @bind-Value="viewModel.LastName" Label="Last Name" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.PostalCode" Label="Postal Code" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="Website Address" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.MobileNumber" Label="Mobile Number" Variant="Variant.Text"></MudTextField>
+                <MudTextField @bind-Value="viewModel.Address" Label="Address" Variant="Variant.Text"></MudTextField>
+            </MudStack>
+        </MudStack>
+    </MudPaper>
+    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Disabled="viewModel.IsBusy" OnClick="(arg) => viewModel.SaveCommand.Execute(null)">
+        @if (viewModel.IsBusy)
+        {
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            <MudText Class="ms-2">Saving</MudText>
+        }
+        else
+        {
+            <MudText>Save</MudText>
+        }
+    </MudButton>
+</MudStack>
+
+@code {
+    public AddOrUpdatePersonViewModel ViewModel
+    {
+        get
+        {
+            return viewModel;
+        }
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        _ = viewModel.LoadConfig();
+        viewModel.BindPropertyChanged(StateHasChanged);
+        return base.OnInitializedAsync();
+    }
+}
