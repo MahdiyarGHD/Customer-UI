@@ -1,0 +1,14 @@
+﻿@page "/"
+@using EasyMicroservices.UI.Customers.Blazor.Pages.PersonCategories
+@using EasyMicroservices.UI.Customers.Blazor.Pages.Persons;
+
+<MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+    <MudTabPanel Text="Persons">
+        <FilterPersonsList/>
+    </MudTabPanel>
+    <MudTabPanel Text="PersonCategories">
+        <FilterPersonCategoriesList />
+    </MudTabPanel>
+</MudTabs>
+
+
