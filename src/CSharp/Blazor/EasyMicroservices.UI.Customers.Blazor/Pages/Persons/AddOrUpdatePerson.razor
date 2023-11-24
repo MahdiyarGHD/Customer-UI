@@ -19,6 +19,12 @@
                 <MudTextField @bind-Value="viewModel.VisaNumber" Label="Visa Number" Variant="Variant.Text"></MudTextField>
                 <MudTextField @bind-Value="viewModel.PhoneNumber" Label="Phone Number" Variant="Variant.Text"></MudTextField>
                 <MudTextField @bind-Value="viewModel.EmailAddress" Label="Email Address" Variant="Variant.Text"></MudTextField>
+                <MudSelect @bind-Value="viewModel.SelectedCountryId" Label="Country" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    @foreach (var item in viewModel.CountriesViewModel.Countries)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
             </MudStack>
             <MudStack Spacing="4">
                 <MudSelect @bind-Value="viewModel.PersonType" Label="Person Type" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
@@ -34,6 +40,18 @@
                 <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="Website Address" Variant="Variant.Text"></MudTextField>
                 <MudTextField @bind-Value="viewModel.MobileNumber" Label="Mobile Number" Variant="Variant.Text"></MudTextField>
                 <MudTextField @bind-Value="viewModel.Address" Label="Address" Variant="Variant.Text"></MudTextField>
+                <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="Province" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    @foreach (var item in viewModel.ProvincesListViewModel.Provinces)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect @bind-Value="viewModel.SelectedCityId" Label="City" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    @foreach (var item in viewModel.CitiesListViewModel.Cities)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
             </MudStack>
         </MudStack>
     </MudPaper>
