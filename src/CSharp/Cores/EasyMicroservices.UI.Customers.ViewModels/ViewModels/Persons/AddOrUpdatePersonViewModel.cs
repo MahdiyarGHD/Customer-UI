@@ -5,6 +5,7 @@ using EasyMicroservices.UI.Cores.Commands;
 using EasyMicroservices.UI.Places.ViewModels.Cities;
 using EasyMicroservices.UI.Places.ViewModels.Countries;
 using EasyMicroservices.UI.Places.ViewModels.Provinces;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 
 namespace EasyMicroservices.UI.Customers.ViewModels.Persons
@@ -50,6 +51,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                     LastName = value.LastName;
                     Description = value.Description;
                     PersonType = value.Type;
+                    ExternalServiceIdentifier = value.ExternalServiceIdentifier;
                     Address = value.Addresses?.Select(x => x.Address).FirstOrDefault();
                     EmailAddress = value.Emails?.Select(x => x.Address).FirstOrDefault();
                     WebsiteAddress = value.Links?.Select(x => x.Address).FirstOrDefault();
@@ -127,6 +129,17 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             {
                 _PostalCode = value;
                 OnPropertyChanged(nameof(PostalCode));
+            }
+        }
+
+        string _ExternalServiceIdentifier;
+        public string ExternalServiceIdentifier
+        {
+            get => _ExternalServiceIdentifier;
+            set
+            {
+                _ExternalServiceIdentifier = value;
+                OnPropertyChanged(nameof(ExternalServiceIdentifier));
             }
         }
 
@@ -249,7 +262,8 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Phones = GetPhones(),
                 CityId = SelectedCityId,
                 ProvinceId = SelectedProvinceId,
-                CountryId = SelectedCountryId
+                CountryId = SelectedCountryId,
+                ExternalServiceIdentifier = ExternalServiceIdentifier
             }).AsCheckedResult(x => x.Result);
             Clear();
         }
@@ -280,7 +294,8 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Phones = GetPhones(),
                 CityId = SelectedCityId,
                 ProvinceId = SelectedProvinceId,
-                CountryId = SelectedCountryId
+                CountryId = SelectedCountryId,
+                ExternalServiceIdentifier = ExternalServiceIdentifier
             }).AsCheckedResult(x => x.Result);
             Clear();
         }
@@ -410,8 +425,23 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public void Clear()
         {
+            ExternalServiceIdentifier = default;
             FirstName = "";
             UpdatePersonContract = default;
+            FirstName = default;
+            LastName = default;
+            Description = default;
+            PersonType = PersonType.RealPerson;
+            ExternalServiceIdentifier = default;
+            Address = default;
+            EmailAddress = default;
+            WebsiteAddress = default;
+            VisaNumber = default;
+            PhoneNumber = default;
+            MobileNumber = default;
+            SelectedCityId = default;
+            SelectedProvinceId = default;
+            SelectedCountryId = default;
         }
     }
 }

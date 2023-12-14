@@ -1,72 +1,76 @@
 ﻿@page "/AddOrUpdatePerson"
+@using EasyMicroservices.UI.Cores
 @using EasyMicroservices.UI.Customers.ViewModels.Persons;
 @using MudBlazor
 @using global::Customer.GeneratedServices;
 @inject AddOrUpdatePersonViewModel viewModel;
 
-<MudStack>
-    <MudPaper Class="pa-4">
-        <MudStack Spacing="4" Row="true" Justify="Justify.SpaceAround" AlignItems="AlignItems.Start">
-            <MudStack Spacing="4">
-                <MudSelect @bind-Value="viewModel.SelectedPersonCategoryId" Label="Person Category" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
-                    @foreach (var item in viewModel.PersonCategories)
-                    {
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    }
-                </MudSelect>
-                <MudTextField @bind-Value="viewModel.FirstName" Label="First Name" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.PassportNumber" Label="Passport Number" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.VisaNumber" Label="Visa Number" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.PhoneNumber" Label="Phone Number" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.EmailAddress" Label="Email Address" Variant="Variant.Text"></MudTextField>
-                <MudSelect @bind-Value="viewModel.SelectedCountryId" Label="Country" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
-                    @foreach (var item in viewModel.CountriesViewModel.Countries)
-                    {
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    }
-                </MudSelect>
+<MudRTLProvider RightToLeft="BaseViewModel.IsRightToLeft">
+    <MudStack>
+        <MudPaper Class="pa-4">
+            <MudStack Spacing="4" Row="true" Justify="Justify.SpaceAround" AlignItems="AlignItems.Start">
+                <MudStack Spacing="4">
+                    <MudSelect @bind-Value="viewModel.SelectedPersonCategoryId" Label="@viewModel.GetLanguage("Customers_PersonCategory_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                        @foreach (var item in viewModel.PersonCategories)
+                        {
+                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudTextField @bind-Value="viewModel.FirstName" Label="@viewModel.GetLanguage("FirstName")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PassportNumber" Label="@viewModel.GetLanguage("PassportNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.VisaNumber" Label="@viewModel.GetLanguage("VisaNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PhoneNumber" Label="@viewModel.GetLanguage("PhoneNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.EmailAddress" Label="@viewModel.GetLanguage("EmailAddress")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.ExternalServiceIdentifier" Label="@viewModel.GetLanguage("Customers_ExternalServiceIdentifier_Title")" Variant="Variant.Text"></MudTextField>
+                    <MudSelect @bind-Value="viewModel.SelectedCountryId" Label="@viewModel.GetLanguage("Country")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                        @foreach (var item in viewModel.CountriesViewModel.Countries)
+                        {
+                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudStack>
+                <MudStack Spacing="4">
+                    <MudSelect @bind-Value="viewModel.PersonType" Label="@viewModel.GetLanguage("Customers_PersonType_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                        @foreach (PersonType item in Enum.GetValues<PersonType>())
+                        {
+                            if ((int)item < 6)
+                                continue;
+                            <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudTextField @bind-Value="viewModel.LastName" Label="@viewModel.GetLanguage("LastName")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PostalCode" Label="@viewModel.GetLanguage("PostalCode")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="@viewModel.GetLanguage("WebsiteAddress")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.MobileNumber" Label="@viewModel.GetLanguage("MobileNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.Address" Label="@viewModel.GetLanguage("Address")" Variant="Variant.Text"></MudTextField>
+                    <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="@viewModel.GetLanguage("Province")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                        @foreach (var item in viewModel.ProvincesListViewModel.Provinces)
+                        {
+                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudSelect @bind-Value="viewModel.SelectedCityId" Label="@viewModel.GetLanguage("City")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                        @foreach (var item in viewModel.CitiesListViewModel.Cities)
+                        {
+                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudStack>
             </MudStack>
-            <MudStack Spacing="4">
-                <MudSelect @bind-Value="viewModel.PersonType" Label="Person Type" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
-                    @foreach (PersonType item in Enum.GetValues<PersonType>())
-                    {
-                        if ((int)item < 6)
-                            continue;
-                        <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
-                    }
-                </MudSelect>
-                <MudTextField @bind-Value="viewModel.LastName" Label="Last Name" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.PostalCode" Label="Postal Code" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="Website Address" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.MobileNumber" Label="Mobile Number" Variant="Variant.Text"></MudTextField>
-                <MudTextField @bind-Value="viewModel.Address" Label="Address" Variant="Variant.Text"></MudTextField>
-                <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="Province" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
-                    @foreach (var item in viewModel.ProvincesListViewModel.Provinces)
-                    {
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    }
-                </MudSelect>
-                <MudSelect @bind-Value="viewModel.SelectedCityId" Label="City" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
-                    @foreach (var item in viewModel.CitiesListViewModel.Cities)
-                    {
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudStack>
-        </MudStack>
-    </MudPaper>
-    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Disabled="viewModel.IsBusy" OnClick="(arg) => viewModel.SaveCommand.Execute(null)">
-        @if (viewModel.IsBusy)
-        {
-            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-            <MudText Class="ms-2">Saving</MudText>
-        }
-        else
-        {
-            <MudText>Save</MudText>
-        }
-    </MudButton>
-</MudStack>
+        </MudPaper>
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Disabled="viewModel.IsBusy" OnClick="(arg) => viewModel.SaveCommand.Execute(null)">
+            @if (viewModel.IsBusy)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                <MudText Class="ms-2">@viewModel.GetLanguage("Saving")</MudText>
+            }
+            else
+            {
+                <MudText>@viewModel.GetLanguage("Save")</MudText>
+            }
+        </MudButton>
+    </MudStack>
+</MudRTLProvider>
 
 @code {
     public AddOrUpdatePersonViewModel ViewModel

@@ -17,8 +17,8 @@ namespace EasyMicroservices.UI.Customers.ViewModels.PersonCategories
             SearchCommand.Execute(null);
         }
 
-        public ICommandAsync SearchCommand { get; set; }
-        public ICommandAsync DeleteCommand { get; set; }
+        public IAsyncCommand SearchCommand { get; set; }
+        public IAsyncCommand DeleteCommand { get; set; }
 
         public Action<PersonCategoryContract> OnDelete { get; set; }
         readonly PersonCategoryClient _personCategoryClient;
