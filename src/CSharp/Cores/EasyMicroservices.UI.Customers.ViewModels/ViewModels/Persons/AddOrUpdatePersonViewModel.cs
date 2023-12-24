@@ -273,11 +273,6 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             return base.OnError(exception);
         }
 
-        public override Task DisplayFetchError(ServiceContracts.ErrorContract errorContract)
-        {
-            return base.DisplayFetchError(errorContract);
-        }
-
         public async Task UpdatePerson()
         {
             await _personClient.UpdateChangedValuesOnlyAsync(new UpdatePersonRequestContract()
@@ -399,10 +394,10 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
             if (UpdatePersonContract != null)
             {
-                var personContract = await _personClient.GetByIdAndLanguageAsync(new Int64GetByIdAndLanguageRequestContract()
+                var personContract = await _personClient.GetByIdAsync(new Int64GetByIdLanguageRequestContract()
                 {
                     Id = UpdatePersonContract.Id,
-                    Language = "fa-IR"
+                    LanguageShortName = "fa-IR"
                 });
                 if (personContract.IsSuccess)
                 {
@@ -432,7 +427,6 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             LastName = default;
             Description = default;
             PersonType = PersonType.RealPerson;
-            ExternalServiceIdentifier = default;
             Address = default;
             EmailAddress = default;
             WebsiteAddress = default;

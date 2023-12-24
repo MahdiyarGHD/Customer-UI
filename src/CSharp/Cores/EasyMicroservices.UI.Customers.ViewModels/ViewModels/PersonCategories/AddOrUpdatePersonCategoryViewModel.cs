@@ -73,11 +73,6 @@ namespace EasyMicroservices.UI.Customers.ViewModels.PersonCategories
             return base.OnError(exception);
         }
 
-        public override Task DisplayFetchError(ServiceContracts.ErrorContract errorContract)
-        {
-            return base.DisplayFetchError(errorContract);
-        }
-
         public async Task UpdatePerson()
         {
             await _personCategoryClient.UpdateChangedValuesOnlyAsync(new  UpdatePersonCategoryRequestContract()
