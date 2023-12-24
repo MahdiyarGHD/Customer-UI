@@ -45,8 +45,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             {
                 IsDeleted = false,
                 Index = Index,
-                Length = Length,
-                SortColumnNames = SortColumnNames
+                Length = Length
             }).AsCheckedResult(x => (x.Result, x.TotalCount));
 
             Persons.Clear();
@@ -71,11 +70,6 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
         public override Task OnError(Exception exception)
         {
             return base.OnError(exception);
-        }
-
-        public override Task DisplayFetchError(ServiceContracts.ErrorContract errorContract)
-        {
-            return base.DisplayFetchError(errorContract);
         }
     }
 }
