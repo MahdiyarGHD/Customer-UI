@@ -10,19 +10,19 @@
         <MudPaper Class="pa-4">
             <MudStack Spacing="4" Row="true" Justify="Justify.SpaceAround" AlignItems="AlignItems.Start">
                 <MudStack Spacing="4">
-                    <MudSelect @bind-Value="viewModel.SelectedPersonCategoryId" Label="@viewModel.GetLanguage("Customers_PersonCategory_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    <MudSelect @bind-Value="viewModel.SelectedPersonCategoryId" Label="@viewModel.GetInnerTranslatedByKey("Customers_PersonCategory_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (var item in viewModel.PersonCategories)
                         {
                             <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
                         }
                     </MudSelect>
-                    <MudTextField @bind-Value="viewModel.FirstName" Label="@viewModel.GetLanguage("FirstName")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.PassportNumber" Label="@viewModel.GetLanguage("PassportNumber")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.VisaNumber" Label="@viewModel.GetLanguage("VisaNumber")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.PhoneNumber" Label="@viewModel.GetLanguage("PhoneNumber")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.EmailAddress" Label="@viewModel.GetLanguage("EmailAddress")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.ExternalServiceIdentifier" Label="@viewModel.GetLanguage("Customers_ExternalServiceIdentifier_Title")" Variant="Variant.Text"></MudTextField>
-                    <MudSelect @bind-Value="viewModel.SelectedCountryId" Label="@viewModel.GetLanguage("Country")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    <MudTextField @bind-Value="viewModel.FirstName" Label="@viewModel.GetInnerTranslatedByKey("FirstName")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PassportNumber" Label="@viewModel.GetInnerTranslatedByKey("PassportNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.VisaNumber" Label="@viewModel.GetInnerTranslatedByKey("VisaNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PhoneNumber" Label="@viewModel.GetInnerTranslatedByKey("PhoneNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.EmailAddress" Label="@viewModel.GetInnerTranslatedByKey("EmailAddress")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.ExternalServiceIdentifier" Label="@viewModel.GetInnerTranslatedByKey("Customers_ExternalServiceIdentifier_Title")" Variant="Variant.Text"></MudTextField>
+                    <MudSelect @bind-Value="viewModel.SelectedCountryId" Label="@viewModel.GetInnerTranslatedByKey("Country")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (var item in viewModel.CountriesViewModel.Countries)
                         {
                             <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
@@ -30,7 +30,7 @@
                     </MudSelect>
                 </MudStack>
                 <MudStack Spacing="4">
-                    <MudSelect @bind-Value="viewModel.PersonType" Label="@viewModel.GetLanguage("Customers_PersonType_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    <MudSelect @bind-Value="viewModel.PersonType" Label="@viewModel.GetInnerTranslatedByKey("Customers_PersonType_Title")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (PersonType item in Enum.GetValues<PersonType>())
                         {
                             if ((int)item < 6)
@@ -38,18 +38,18 @@
                             <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
                         }
                     </MudSelect>
-                    <MudTextField @bind-Value="viewModel.LastName" Label="@viewModel.GetLanguage("LastName")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.PostalCode" Label="@viewModel.GetLanguage("PostalCode")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="@viewModel.GetLanguage("WebsiteAddress")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.MobileNumber" Label="@viewModel.GetLanguage("MobileNumber")" Variant="Variant.Text"></MudTextField>
-                    <MudTextField @bind-Value="viewModel.Address" Label="@viewModel.GetLanguage("Address")" Variant="Variant.Text"></MudTextField>
-                    <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="@viewModel.GetLanguage("Province")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    <MudTextField @bind-Value="viewModel.LastName" Label="@viewModel.GetInnerTranslatedByKey("LastName")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.PostalCode" Label="@viewModel.GetInnerTranslatedByKey("PostalCode")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="@viewModel.GetInnerTranslatedByKey("WebsiteAddress")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.MobileNumber" Label="@viewModel.GetInnerTranslatedByKey("MobileNumber")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.Address" Label="@viewModel.GetInnerTranslatedByKey("Address")" Variant="Variant.Text"></MudTextField>
+                    <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="@viewModel.GetInnerTranslatedByKey("Province")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (var item in viewModel.ProvincesListViewModel.Provinces)
                         {
                             <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
                         }
                     </MudSelect>
-                    <MudSelect @bind-Value="viewModel.SelectedCityId" Label="@viewModel.GetLanguage("City")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
+                    <MudSelect @bind-Value="viewModel.SelectedCityId" Label="@viewModel.GetInnerTranslatedByKey("City")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (var item in viewModel.CitiesListViewModel.Cities)
                         {
                             <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
@@ -62,11 +62,11 @@
             @if (viewModel.IsBusy)
             {
                 <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-                <MudText Class="ms-2">@viewModel.GetLanguage("Saving")</MudText>
+                <MudText Class="ms-2">@viewModel.GetInnerTranslatedByKey("Saving")</MudText>
             }
             else
             {
-                <MudText>@viewModel.GetLanguage("Save")</MudText>
+                <MudText>@viewModel.GetInnerTranslatedByKey("Save")</MudText>
             }
         </MudButton>
     </MudStack>
