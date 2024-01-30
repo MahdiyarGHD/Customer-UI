@@ -445,6 +445,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             PersonType = PersonType.RealPerson;
             Address = default;
             PostalCode = default;   
+            PassportNumber = default;
             EmailAddress = default;
             WebsiteAddress = default;
             VisaNumber = default;
