@@ -402,6 +402,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 if (personContract.IsSuccess)
                 {
                     UpdatePersonContract = personContract.Result;
+                    PostalCode = UpdatePersonContract.Addresses.FirstOrDefault().PostalCode;
                 }
             }
 
