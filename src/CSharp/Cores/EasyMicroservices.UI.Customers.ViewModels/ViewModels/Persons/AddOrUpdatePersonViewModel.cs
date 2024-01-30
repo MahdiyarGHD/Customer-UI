@@ -56,6 +56,8 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                     EmailAddress = value.Emails?.Select(x => x.Address).FirstOrDefault();
                     WebsiteAddress = value.Links?.Select(x => x.Address).FirstOrDefault();
                     VisaNumber = value.Visas?.Select(x => x.Number).FirstOrDefault();
+                    PassportNumber = value.Passports?.Select(x => x.Number).FirstOrDefault();
+                    PostalCode = value.Addresses?.Select(x => x.PostalCode).FirstOrDefault();
                     PhoneNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Home).Select(x => x.Number).FirstOrDefault();
                     MobileNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Mobile).Select(x => x.Number).FirstOrDefault();
                     SelectedCityId = value.CityId.GetValueOrDefault();
@@ -260,6 +262,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Links = GetSites(),
                 Visas = GetVisas(),
                 Phones = GetPhones(),
+                Passports = GetPassports(),
                 CityId = SelectedCityId,
                 ProvinceId = SelectedProvinceId,
                 CountryId = SelectedCountryId,
@@ -285,6 +288,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Addresses = GetAddresses(),
                 Emails = GetEmails(),
                 Links = GetSites(),
+                Passports = GetPassports(),
                 Visas = GetVisas(),
                 Phones = GetPhones(),
                 CityId = SelectedCityId,
@@ -363,6 +367,18 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 }
             };
         }
+
+        List<PassportBaseContract> GetPassports()
+        {
+            return new List<PassportBaseContract>
+            {
+                new PassportBaseContract()
+                {
+                    Number = PassportNumber
+                }
+            };
+        }
+
         List<PhoneBaseContract> GetPhones()
         {
             return new List<PhoneBaseContract>
@@ -428,6 +444,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             Description = default;
             PersonType = PersonType.RealPerson;
             Address = default;
+            PostalCode = default;   
             EmailAddress = default;
             WebsiteAddress = default;
             VisaNumber = default;
