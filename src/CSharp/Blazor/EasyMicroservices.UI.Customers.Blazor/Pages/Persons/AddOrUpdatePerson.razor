@@ -43,6 +43,7 @@
                     <MudTextField @bind-Value="viewModel.WebsiteAddress" Label="@viewModel.GetInnerTranslatedByKey("WebsiteAddress")" Variant="Variant.Text"></MudTextField>
                     <MudTextField @bind-Value="viewModel.MobileNumber" Label="@viewModel.GetInnerTranslatedByKey("MobileNumber")" Variant="Variant.Text"></MudTextField>
                     <MudTextField @bind-Value="viewModel.Address" Label="@viewModel.GetInnerTranslatedByKey("Address")" Variant="Variant.Text"></MudTextField>
+                    <MudTextField @bind-Value="viewModel.NationalCode" Label="@viewModel.GetInnerTranslatedByKey("NationalCode")" Variant="Variant.Text"></MudTextField>
                     <MudSelect @bind-Value="viewModel.SelectedProvinceId" Label="@viewModel.GetInnerTranslatedByKey("Province")" OpenIcon="@Icons.Material.Filled.LocalDrink" AdornmentColor="Color.Secondary">
                         @foreach (var item in viewModel.ProvincesListViewModel.Provinces)
                         {

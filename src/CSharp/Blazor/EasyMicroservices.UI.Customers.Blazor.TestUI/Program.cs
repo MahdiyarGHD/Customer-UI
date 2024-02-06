@@ -260,4 +260,9 @@ void LoadLanguage(string languageShortName)
         ShortName = languageShortName,
         Value = "Province"
     });
+    BaseViewModel.AppendLanguage("NationalCode", new LanguageContract()
+    {
+        ShortName = languageShortName,
+        Value = "NationalCode"
+    });
 }

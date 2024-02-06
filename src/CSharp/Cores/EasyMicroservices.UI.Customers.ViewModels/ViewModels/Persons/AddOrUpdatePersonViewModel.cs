@@ -58,6 +58,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                     VisaNumber = value.Visas?.Select(x => x.Number).FirstOrDefault();
                     PassportNumber = value.Passports?.Select(x => x.Number).FirstOrDefault();
                     PostalCode = value.Addresses?.Select(x => x.PostalCode).FirstOrDefault();
+                    NationalCode = value.NationalCode;
                     PhoneNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Home).Select(x => x.Number).FirstOrDefault();
                     MobileNumber = value.Phones?.Where(x => x.NumberType == PhoneNumberType.Mobile).Select(x => x.Number).FirstOrDefault();
                     SelectedCityId = value.CityId.GetValueOrDefault();
@@ -211,6 +212,17 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             }
         }
 
+        string _NationalCode;
+        public string NationalCode
+        {
+            get => _NationalCode;
+            set
+            {
+                _NationalCode = value;
+                OnPropertyChanged(nameof(NationalCode));
+            }
+        }
+
         public long SelectedPersonCategoryId { get; set; }
 
         public ObservableCollection<PersonCategoryContract> PersonCategories { get; set; } = new ObservableCollection<PersonCategoryContract>();
@@ -264,6 +276,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Phones = GetPhones(),
                 Passports = GetPassports(),
                 CityId = SelectedCityId,
+                NationalCode = NationalCode,
                 ProvinceId = SelectedProvinceId,
                 CountryId = SelectedCountryId,
                 ExternalServiceIdentifier = ExternalServiceIdentifier
@@ -292,6 +305,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 Visas = GetVisas(),
                 Phones = GetPhones(),
                 CityId = SelectedCityId,
+                NationalCode = NationalCode,
                 ProvinceId = SelectedProvinceId,
                 CountryId = SelectedCountryId,
                 ExternalServiceIdentifier = ExternalServiceIdentifier
@@ -451,6 +465,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             VisaNumber = default;
             PhoneNumber = default;
             MobileNumber = default;
+            NationalCode = default;
             SelectedCityId = default;
             SelectedProvinceId = default;
             SelectedCountryId = default;
