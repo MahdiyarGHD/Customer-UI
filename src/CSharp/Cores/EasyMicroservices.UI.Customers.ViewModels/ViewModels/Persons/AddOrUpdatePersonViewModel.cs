@@ -337,12 +337,13 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             };
         }
 
-        List<AddressBaseContract> GetAddresses()
+        List<UpdateAddressRequestContract> GetAddresses()
         {
-            return new List<AddressBaseContract>
+            return new List<UpdateAddressRequestContract>
             {
-                new  AddressBaseContract()
+                new UpdateAddressRequestContract()
                 {
+                    Id = UpdatePersonContract.Addresses.FirstOrDefault().Id,
                     PostalCode = PostalCode,
                     Address = Address
                 }

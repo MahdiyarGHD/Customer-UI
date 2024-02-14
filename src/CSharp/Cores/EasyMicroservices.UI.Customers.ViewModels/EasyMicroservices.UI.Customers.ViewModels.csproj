@@ -19,9 +19,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyMicroservices.CustomerMicroservice.Clients" Version="0.0.0.9" />
+    <!--<PackageReference Include="EasyMicroservices.CustomerMicroservice.Clients" Version="0.0.0.9" />-->
     <PackageReference Include="EasyMicroservices.UI.Cores.Mvvm" Version="0.0.0.23" />
     <PackageReference Include="EasyMicroservices.UI.Places.ViewModels" Version="0.0.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EasyMicroservices.CustomerMicroservice.Clients">
+      <HintPath>..\..\..\..\..\..\Microservices\Customer-Microservice\src\CSharp\EasyMicroservices.CustomerMicroservice.Clients\bin\Debug\net7.0\EasyMicroservices.CustomerMicroservice.Clients.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -19,4 +19,11 @@
     <ProjectReference Include="..\EasyMicroservices.UI.Customers.Blazor\EasyMicroservices.UI.Customers.Blazor.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Reference Include="EasyMicroservices.CustomerMicroservice.Clients">
+			<HintPath>..\..\..\..\..\..\Microservices\Customer-Microservice\src\CSharp\EasyMicroservices.CustomerMicroservice.Clients\bin\Debug\net7.0\EasyMicroservices.CustomerMicroservice.Clients.dll</HintPath>
+
+
+		</Reference>
+	</ItemGroup>
 </Project>
