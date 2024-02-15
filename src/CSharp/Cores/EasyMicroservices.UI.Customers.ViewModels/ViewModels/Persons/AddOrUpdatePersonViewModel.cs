@@ -293,33 +293,26 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public async Task UpdatePerson()
         {
-            try
+            await _personClient.UpdateChangedValuesOnlyAsync(new UpdatePersonRequestContract()
             {
-                await _personClient.UpdateChangedValuesOnlyAsync(new UpdatePersonRequestContract()
-                {
-                    Id = UpdatePersonContract.Id,
-                    FirstNames = GetFirstNames(),
-                    LastNames = GetLastNames(),
-                    Description = Description,
-                    Type = PersonType,
-                    Addresses = GetAddresses(),
-                    Emails = GetEmails(),
-                    Links = GetSites(),
-                    Passports = GetPassports(),
-                    Visas = GetVisas(),
-                    Phones = GetPhones(),
-                    CityId = SelectedCityId,
-                    NationalCode = NationalCode,
-                    ProvinceId = SelectedProvinceId,
-                    CountryId = SelectedCountryId,
-                    ExternalServiceIdentifier = ExternalServiceIdentifier
-                });
-                Clear();
-            } catch (Exception ex)
-            {
-                Console.Write(ex.ToString());
-            }
-
+                Id = UpdatePersonContract.Id,
+                FirstNames = GetFirstNames(),
+                LastNames = GetLastNames(),
+                Description = Description,
+                Type = PersonType,
+                Addresses = GetAddresses(),
+                Emails = GetEmails(),
+                Links = GetSites(),
+                Passports = GetPassports(),
+                Visas = GetVisas(),
+                Phones = GetPhones(),
+                CityId = SelectedCityId,
+                NationalCode = NationalCode,
+                ProvinceId = SelectedProvinceId,
+                CountryId = SelectedCountryId,
+                ExternalServiceIdentifier = ExternalServiceIdentifier
+            });
+            Clear();
         }
 
         List<Customer.GeneratedServices.LanguageDataContract> GetFirstNames()
