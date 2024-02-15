@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic-Layer", "Busi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyMicroservices.UI.Customers.ViewModels", "..\Cores\EasyMicroservices.UI.Customers.ViewModels\EasyMicroservices.UI.Customers.ViewModels.csproj", "{9211C76B-7C44-4429-BF41-2A379324873B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyMicroservices.UI.Customers.Blazor", "EasyMicroservices.UI.Customers.Blazor\EasyMicroservices.UI.Customers.Blazor.csproj", "{E9EDD89E-5EA8-48A6-A8C1-937646E42045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyMicroservices.UI.Customers.Blazor", "EasyMicroservices.UI.Customers.Blazor\EasyMicroservices.UI.Customers.Blazor.csproj", "{E9EDD89E-5EA8-48A6-A8C1-937646E42045}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <Authors>EasyMicroservices</Authors>
     <IsPackable>true</IsPackable>
-    <Version>0.0.0.8</Version>
+    <Version>0.0.0.9</Version>
     <Description>Customers view model.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>mvvm,viewmodel,viewmodels,modelviewviewmodel,ui,core,customers,address,person,visa,passport,phone,email,customer</PackageTags>
@@ -19,15 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="EasyMicroservices.CustomerMicroservice.Clients" Version="0.0.0.9" />-->
+    <PackageReference Include="EasyMicroservices.CustomerMicroservice.Clients" Version="0.0.0.10" />
     <PackageReference Include="EasyMicroservices.UI.Cores.Mvvm" Version="0.0.0.23" />
     <PackageReference Include="EasyMicroservices.UI.Places.ViewModels" Version="0.0.0.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="EasyMicroservices.CustomerMicroservice.Clients">
-      <HintPath>..\..\..\..\..\..\Microservices\Customer-Microservice\src\CSharp\EasyMicroservices.CustomerMicroservice.Clients\bin\Debug\net7.0\EasyMicroservices.CustomerMicroservice.Clients.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

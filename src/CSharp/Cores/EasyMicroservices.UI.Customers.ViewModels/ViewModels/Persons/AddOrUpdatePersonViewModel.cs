@@ -263,6 +263,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public async Task AddPerson()
         {
+
             await _personClient.AddAsync(new CreatePersonRequestContract()
             {
                 FirstNames = GetFirstNames(),
@@ -282,6 +283,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
                 ExternalServiceIdentifier = ExternalServiceIdentifier
             }).AsCheckedResult(x => x.Result);
             Clear();
+
         }
 
         public override Task OnError(Exception exception)
@@ -291,26 +293,33 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
 
         public async Task UpdatePerson()
         {
-            await _personClient.UpdateChangedValuesOnlyAsync(new UpdatePersonRequestContract()
+            try
             {
-                Id = UpdatePersonContract.Id,
-                FirstNames = GetFirstNames(),
-                LastNames = GetLastNames(),
-                Description = Description,
-                Type = PersonType,
-                Addresses = GetAddresses(),
-                Emails = GetEmails(),
-                Links = GetSites(),
-                Passports = GetPassports(),
-                Visas = GetVisas(),
-                Phones = GetPhones(),
-                CityId = SelectedCityId,
-                NationalCode = NationalCode,
-                ProvinceId = SelectedProvinceId,
-                CountryId = SelectedCountryId,
-                ExternalServiceIdentifier = ExternalServiceIdentifier
-            }).AsCheckedResult(x => x.Result);
-            Clear();
+                await _personClient.UpdateChangedValuesOnlyAsync(new UpdatePersonRequestContract()
+                {
+                    Id = UpdatePersonContract.Id,
+                    FirstNames = GetFirstNames(),
+                    LastNames = GetLastNames(),
+                    Description = Description,
+                    Type = PersonType,
+                    Addresses = GetAddresses(),
+                    Emails = GetEmails(),
+                    Links = GetSites(),
+                    Passports = GetPassports(),
+                    Visas = GetVisas(),
+                    Phones = GetPhones(),
+                    CityId = SelectedCityId,
+                    NationalCode = NationalCode,
+                    ProvinceId = SelectedProvinceId,
+                    CountryId = SelectedCountryId,
+                    ExternalServiceIdentifier = ExternalServiceIdentifier
+                });
+                Clear();
+            } catch (Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+
         }
 
         List<Customer.GeneratedServices.LanguageDataContract> GetFirstNames()
@@ -343,70 +352,76 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             {
                 new UpdateAddressRequestContract()
                 {
-                    Id = UpdatePersonContract.Addresses.FirstOrDefault().Id,
+                    Id = UpdatePersonContract?.Addresses?.FirstOrDefault()?.Id ?? 0L,
                     PostalCode = PostalCode,
                     Address = Address
                 }
             };
         }
 
-        List<EmailBaseContract> GetEmails()
+        List<UpdateEmailRequestContract> GetEmails()
         {
-            return new List<EmailBaseContract>
+            return new List<UpdateEmailRequestContract>
             {
-                new  EmailBaseContract()
+                new  UpdateEmailRequestContract()
                 {
+                    Id = UpdatePersonContract?.Emails?.FirstOrDefault()?.Id ?? 0L,
                     Address = EmailAddress
                 }
             };
         }
 
-        List<LinkBaseContract> GetSites()
+        List<UpdateLinkRequestContract> GetSites()
         {
-            return new List<LinkBaseContract>
+            return new List<UpdateLinkRequestContract>
             {
-                new  LinkBaseContract()
+                new  UpdateLinkRequestContract()
                 {
+                    Id = UpdatePersonContract?.Links?.FirstOrDefault()?.Id ?? 0L,
                     Address = WebsiteAddress
                 }
             };
         }
 
-        List<VisaBaseContract> GetVisas()
+        List<UpdateVisaRequestContract> GetVisas()
         {
-            return new List<VisaBaseContract>
+            return new List<UpdateVisaRequestContract>
             {
-                new  VisaBaseContract()
+                new  UpdateVisaRequestContract()
                 {
-                     Number = VisaNumber
+                    Id = UpdatePersonContract?.Visas?.FirstOrDefault()?.Id ?? 0L,
+                    Number = VisaNumber
                 }
             };
         }
 
-        List<PassportBaseContract> GetPassports()
+        List<UpdatePassportRequestContract> GetPassports()
         {
-            return new List<PassportBaseContract>
+            return new List<UpdatePassportRequestContract>
             {
-                new PassportBaseContract()
+                new UpdatePassportRequestContract()
                 {
+                    Id = UpdatePersonContract?.Passports?.FirstOrDefault()?.Id ?? 0L,
                     Number = PassportNumber
                 }
             };
         }
 
-        List<PhoneBaseContract> GetPhones()
+        List<UpdatePhoneRequestContract> GetPhones()
         {
-            return new List<PhoneBaseContract>
+            return new List<UpdatePhoneRequestContract>
             {
-                new  PhoneBaseContract()
+                new UpdatePhoneRequestContract()
                 {
-                     Number = PhoneNumber,
-                     NumberType = PhoneNumberType.Home
+                    Id = UpdatePersonContract?.Phones?.First().Id ?? 0L,
+                    Number = PhoneNumber,
+                    NumberType = PhoneNumberType.Home
                 },
-                new  PhoneBaseContract()
+                new  UpdatePhoneRequestContract()
                 {
-                     Number = MobileNumber,
-                     NumberType = PhoneNumberType.Mobile
+                    Id = UpdatePersonContract?.Phones?.Last().Id ?? 0L,
+                    Number = MobileNumber,
+                    NumberType = PhoneNumberType.Mobile
                 }
             };
         }
@@ -459,7 +474,7 @@ namespace EasyMicroservices.UI.Customers.ViewModels.Persons
             Description = default;
             PersonType = PersonType.RealPerson;
             Address = default;
-            PostalCode = default;   
+            PostalCode = default;
             PassportNumber = default;
             EmailAddress = default;
             WebsiteAddress = default;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -18,12 +18,4 @@
   <ItemGroup>
     <ProjectReference Include="..\EasyMicroservices.UI.Customers.Blazor\EasyMicroservices.UI.Customers.Blazor.csproj" />
   </ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="EasyMicroservices.CustomerMicroservice.Clients">
-			<HintPath>..\..\..\..\..\..\Microservices\Customer-Microservice\src\CSharp\EasyMicroservices.CustomerMicroservice.Clients\bin\Debug\net7.0\EasyMicroservices.CustomerMicroservice.Clients.dll</HintPath>
-
-
-		</Reference>
-	</ItemGroup>
 </Project>

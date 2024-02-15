@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <Authors>EasyMicroservices</Authors>
-    <Version>0.0.0.8</Version>
+    <Version>0.0.0.9</Version>
     <Description>Customers UI compoents.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>component,microcomponent,ui,core,customers,address,person,visa,passport,phone,email,customer</PackageTags>
@@ -32,9 +32,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.25" PrivateAssets="all" />
   </ItemGroup>
 
-	<ItemGroup>
-		<Reference Include="EasyMicroservices.CustomerMicroservice.Clients">
-			<HintPath>..\..\..\..\..\..\Microservices\Customer-Microservice\src\CSharp\EasyMicroservices.CustomerMicroservice.Clients\bin\Debug\net7.0\EasyMicroservices.CustomerMicroservice.Clients.dll</HintPath>
-		</Reference>
-	</ItemGroup>
 </Project>
